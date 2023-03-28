@@ -72,7 +72,24 @@ $ ./vpn-execute.sh `<identifier>` "`<command>`"
 
 Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
 
+## Configuration File
+
+The scripts require a standard WireGuard configuration file to set up the VPN instance in the new network namespace. The configuration file should include an `Address` and a `DNS` field, as these values are essential for proper functioning. The `Address` field should contain the IP address and subnet mask for the WireGuard interface, and the `DNS` field should include the DNS server IP address that will be used for resolving domain names. The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
+
+```
+[Interface]
+PrivateKey = EXAMPLE_PRIVATE_KEY
+Address = 10.0.0.2/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = EXAMPLE_PUBLIC_KEY
+AllowedIPs = 0.0.0.0/0
+Endpoint = example-vpn-server.com:51820
+```
+
+
 ## Disclaimer
 
-These scripts have only been tested with Mullvad VPN and may not be compatible with other VPN providers. The scripts do not support IPv6 addresses in the configuration file. When choosing an identifier name, please avoid using hyphens (-) or underscores (_) to ensure proper functioning.
+These scripts have only been tested with Mullvad VPN. The scripts do not support IPv6 addresses in the configuration file. When choosing an identifier name, please avoid using hyphens (-) or underscores (_) to ensure proper functioning.
 
