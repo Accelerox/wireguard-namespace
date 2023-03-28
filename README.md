@@ -1,7 +1,7 @@
 # WireGuard VPN Namespace Management Scripts
 
 This collection of scripts helps you manage multiple WireGuard VPN instances running in separate network namespaces. 
-The scripts automate the creation, deletion, and execution of commands in the namespaces. These scripts are designed for Linux systems.
+The scripts automate the installation, creation and deletion of namespace configurations aswell as execution of commands in the namespaces. These scripts are designed for Linux systems.
 
 ## Prerequisites
 
