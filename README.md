@@ -20,7 +20,7 @@ This script sets up the bridge `br0` and disables the Spanning Tree Protocol (ST
 
 **Usage:**
 
-vpn-install.sh
+$ ./vpn-install.sh
 
 ### 2. vpn-start.sh
 
