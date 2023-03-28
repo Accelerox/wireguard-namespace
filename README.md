@@ -28,7 +28,7 @@ This script sets up a WireGuard VPN instance in a new network namespace using a 
 
 **Usage:**
 
-$ ./vpn-start.sh <configuration_file> <identifier>
+$ ./vpn-start.sh `<configuration_file>` <identifier>
 
 Replace `<configuration_file>` with the path to the configuration file and `<identifier>` with a unique name to create a new instance.
 
