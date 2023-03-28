@@ -1,0 +1,111 @@
+#!/bin/bash
+#
+# This script sets up multiple instances of WireGuard VPN, each with its own
+# namespace and network interfaces. It accepts a configuration file and a unique
+# identifier as arguments to create an isolated environment for each VPN connection.
+#
+# PS: These setups doesn't survive reboots and this script needs to be run at each boot.
+# A system service can be used or the script can be executed from the crontab.
+#
+# Usage: ./vpn-start.sh <configuration_file> <identifier>
+
+if [[ $# -ne 2 ]]; then
+    echo "Usage: $0 <configuration_file> <identifier>"
+    exit 1
+fi
+
+configuration_file=$1
+identifier=$2
+
+if [[ ! -f $configuration_file ]]; then
+    echo "Configuration file '$configuration_file' not found"
+    exit 1
+fi
+
+# Create a temporary configuration file with a newline character appended
+tmp_configuration_file=$(mktemp)
+cat "$configuration_file" <(echo "") > "$tmp_configuration_file"
+
+# Read the temporary configuration file
+while read -r line; do
+    case "$line" in
+        'PrivateKey = '*)
+            private_key="${line#*= }"
+            ;;
+        'Address = '*)
+            address="${line#*= }"
+            ;;
+        'DNS = '*)
+            dns="${line#*= }"
+            ;;
+        'PublicKey = '*)
+            public_key="${line#*= }"
+            ;;
+        'AllowedIPs = '*)
+            allowed_ips="${line#*= }"
+            ;;
+        'Endpoint = '*)
+            endpoint="${line#*= }"
+            ;;
+        *)
+            # Ignore any other lines
+            ;;
+    esac
+done < "$tmp_configuration_file"
+
+# Remove the temporary configuration file
+rm "$tmp_configuration_file"
+
+# Create folder for namespace
+set -x
+
+mkdir -p /etc/netns/${identifier}
+
+echo "nameserver $dns" > /etc/netns/${identifier}/resolv.conf
+
+# Create the namespace, the wg0 interface, and configure it
+# Must be run as root or sudo
+
+# Create the namespace
+ip netns add ${identifier}
+
+# Create a WireGuard interface in the default/init namespace
+ip link add wg0-${identifier} type wireguard
+
+# Move the WireGuard interface to the namespace
+ip link set wg0-${identifier} netns ${identifier}
+
+# Bring up the loopback interface in the namespace
+ip netns exec ${identifier} ip link set lo up
+
+# Assign address (see config file) to the wg0 interface (IPv4 only)
+ip netns exec ${identifier} ip addr add "$address" dev wg0-${identifier}
+
+# Bring the wg0 interface up
+ip netns exec ${identifier} ip link set wg0-${identifier} up
+
+# Configure keys on the wg0 interface
+ip netns exec ${identifier} wg set wg0-${identifier} private-key <(echo  "$private_key")
+
+ip netns exec ${identifier} wg set wg0-${identifier} peer "$public_key" allowed-ips "$allowed_ips" endpoint "$endpoint"
+
+# Set a default route in the namespace
+ip netns exec ${identifier} route add default dev wg0-${identifier}
+
+# Create virtual interface connections between bridge and namespace
+ip link add veth-nsbr-${identifier} type veth peer name veth-ns-${identifier}
+sleep 1
+ip link set veth-nsbr-${identifier} master br0
+ip link set veth-ns-${identifier} netns ${identifier} up
+ip link set veth-nsbr-${identifier} up
+
+# Create virtual interface connection between INIT and bridge
+ip link add veth-br-${identifier} type veth peer name veth-init-${identifier}
+sleep 1
+ip link set veth-br-${identifier} master br0 
+ip link set veth-init-${identifier} up
+ip link set veth-br-${identifier} up
+
+# Assign IP addresses to interfaces
+ip address add 192.168.12.2/24 dev veth-init-${identifier}
+ip netns exec ${identifier} ip address add 192.168.12.3/24 dev veth-ns-${identifier}
