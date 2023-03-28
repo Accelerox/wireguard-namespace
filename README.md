@@ -72,4 +72,7 @@ $ ./vpn-execute.sh `<identifier>` "`<command>`"
 
 Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
 
+## Disclaimer
+
+These scripts have only been tested with Mullvad VPN and may not be compatible with other VPN providers. The scripts do not support IPv6 addresses in the configuration file. When choosing an identifier name, please avoid using hyphens (-) or underscores (_) to ensure proper functioning.
 
