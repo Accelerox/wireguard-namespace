@@ -7,9 +7,8 @@ The scripts automate the creation, deletion, and execution of commands in the na
 
 To use these scripts, you must have the following programs installed on your system:
 
-- `iproute2`: Provides the `ip` command for managing network namespaces.
 - `wireguard`: Provides the WireGuard VPN kernel module and user-space utilities.
-- `bash`: Provides the shell used by the scripts.
+- `iproute2`: Provides the `ip` command for managing network namespaces.
 - `nmcli`: NetworkManager command-line tool (optional, used by the bridge_install.sh script).
 
 ## Scripts
