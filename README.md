@@ -28,17 +28,18 @@ This script sets up a WireGuard VPN instance in a new network namespace using a 
 
 **Usage:**
 
-$ ./vpn-start.sh `<configuration_file>` <identifier>
+$ ./vpn-start.sh `<configuration_file>` `<identifier>`
 
 Replace `<configuration_file>` with the path to the configuration file and `<identifier>` with a unique name to create a new instance.
 
 ### 3. vpn-stop.sh
 
-This script stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, and virtual Ethernet (veth) interfaces.
+This script stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, 
+and virtual Ethernet (veth) interfaces.
 
 **Usage:**
 
-$ ./vpn-stop.sh <identifier>
+$ ./vpn-stop.sh `<identifier>`
 
 Replace `<identifier>` with the name of the VPN instance you want to stop.
 
@@ -52,11 +53,12 @@ $ ./vpn-remove.sh
 
 ### 5. vpn-shell.sh
 
-This script starts a new bash shell in the specified namespace, preserving the current user. The new bash shell displays the unique identifier name in the prompt.
+This script starts a new bash shell in the specified namespace, preserving the current user. 
+The new bash shell displays the unique identifier name in the prompt.
 
 **Usage:**
 
-$ ./vpn-shell.sh <identifier>
+$ ./vpn-shell.sh `<identifier>`
 
 Replace `<identifier>` with the name of the VPN instance you want to enter.
 
@@ -66,7 +68,7 @@ This script takes an identifier and a command string as input and executes the c
 
 **Usage:**
 
-$ ./vpn-execute.sh <identifier> "<command>"
+$ ./vpn-execute.sh `<identifier>` "`<command>`"
 
 Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
 
