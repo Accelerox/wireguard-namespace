@@ -1,12 +1,18 @@
 #!/bin/bash
 
 # This script executes the given command in the specified namespace.
-# Make sure command is in quotes ""
-# 
-# Usage: ./vpn-execute.sh <identifier> "<command>"
+# Make sure the command is in quotes ""
+#
+# Usage: sudo ./vpn-execute.sh <identifier> "<command>"
+
+# Check if the script is run with sudo
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run with sudo"
+    exit 1
+fi
 
 if [[ $# -ne 2 ]]; then
-    echo "Usage: $0 <identifier> <command>"
+    echo "Usage: $0 <identifier> \"<command>\""
     exit 1
 fi
 
