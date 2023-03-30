@@ -57,9 +57,9 @@ The new bash shell displays the unique identifier name in the prompt.
 
 **Usage:**
 
-$ ./vpn-shell.sh `<identifier>`
+$ ./vpn-shell.sh `<identifier>` `<user-name>`
 
-Replace `<identifier>` with the name of the VPN instance you want to enter.
+Replace `<identifier>` with the name of the VPN instance you want to enter and `<user-name>` with the user-id of the new shell.
 
 ### 6. vpn-execute.sh
 
