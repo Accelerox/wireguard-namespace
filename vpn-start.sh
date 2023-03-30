@@ -9,6 +9,12 @@
 #
 # Usage: ./vpn-start.sh <configuration_file> <identifier>
 
+# Check if the script is run with sudo
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run with sudo"
+    exit 1
+fi
+
 if [[ $# -ne 2 ]]; then
     echo "Usage: $0 <configuration_file> <identifier>"
     exit 1
