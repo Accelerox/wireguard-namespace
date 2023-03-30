@@ -4,6 +4,12 @@
 #
 # Usage: ./vpn-remove.sh
 
+# Check if the script is run with sudo
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run with sudo"
+    exit 1
+fi
+
 # Get a list of all the VPN instances' namespaces
 namespaces=$(ip netns list | grep -E '^[a-zA-Z0-9_-]+$')
 
