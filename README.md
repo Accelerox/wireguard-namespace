@@ -13,9 +13,11 @@ To use these scripts, you must have the following programs installed on your sys
 
 ## Example Usage
 
+```
 $ sudo wg-netns-install
-$ sudo wg-netns-start `path/to/wg.conf` `netnsname`
-$ sudo wg-netns-execute `netnsname`"curl ifconfig.me/ip"
+$ sudo wg-netns-start /path/to/wg.conf netnsname
+$ sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
+```
 
 ## Configuration File
 
