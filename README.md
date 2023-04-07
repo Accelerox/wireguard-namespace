@@ -1,7 +1,9 @@
 # WireGuard VPN Namespace Management Scripts
 
 This collection of scripts helps you manage multiple WireGuard VPN instances running in separate network namespaces. 
-The scripts automate the installation, creation and deletion of namespace configurations aswell as execution of commands in the namespaces. These scripts are designed for Linux systems.
+The scripts automate the installation, creation and deletion of namespace configurations aswell as execution of commands in the namespaces. 
+
+These scripts are designed for Linux systems.
 
 ## Prerequisites
 
@@ -12,11 +14,19 @@ To use these scripts, you must have the following programs installed on your sys
 - `nmcli`: NetworkManager command-line tool (optional, used by the bridge_install.sh script).
 
 ## Example Usage
-
+Install and execute a ip command from the network namespace
 ```
 $ sudo wg-netns-install
 $ sudo wg-netns-start /path/to/wg.conf netnsname
 $ sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
+```
+Bring the network namespace down
+```
+$ sudo wg-nets-stop netnsname
+```
+Remove all traces of the scripts
+```
+$ sudo wg-netns-remove
 ```
 
 ## Configuration File
