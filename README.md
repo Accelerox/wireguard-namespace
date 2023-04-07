@@ -2,7 +2,7 @@
 
 This script collection simplifies the management of multiple WireGuard VPN instances running in separate network namespaces. The scripts automate the installation, creation, and deletion of namespace configurations and execution of commands within the namespaces.
 
-To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as wireguard. This eliminates the need to alter any iptables rules to route packets correctly and avoids interference with other network configurations on the system.
+To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as `wireguard`. This eliminates the need to alter any iptables rules to route packets correctly and avoids interference with other network configurations on the system.
 
 ## Prerequisites
 
@@ -14,17 +14,20 @@ To use these scripts, you must have the following programs installed on your sys
 
 ## Example Usage
 Install and execute a ip command from the network namespace
-```
+```bash
 $ sudo wg-netns-install
 $ sudo wg-netns-start /path/to/wg.conf netnsname
 $ sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
 ```
-Bring the network namespace down
+```diff
+! Please note that the changes implemeted by the wg-netns-start command doesn't survive reboot.
 ```
+Bring the network namespace down
+```bash
 $ sudo wg-netns-stop netnsname
 ```
 Remove all traces of the scripts
-```
+```bash
 $ sudo wg-netns-remove
 ```
 
@@ -48,64 +51,43 @@ Endpoint = example-vpn-server.com:51820
 
 ## Scripts
 
-### 1. wg-netns-install
+1. `wg-netns-install`: Sets up a bridge named `br0`.
 
-This script sets up a bridge named `br0`
-
-**Usage:**
-
+```bash
 $ ./wg-netns-install
+```
 
-### 2. wg-netns-start
+2. `wg-netns-start`: Sets up a WireGuard VPN instance in a new network namespace using a specified configuration file and a unique identifier.
 
-This script sets up a WireGuard VPN instance in a new network namespace using a specified configuration file and a unique identifier.
+```bash
+$ ./wg-netns-start /path/to/config.conf netnsname
+```
 
-**Usage:**
+3. `wg-netns-shell`: Starts a new bash shell in the specified namespace, preserving the current user. The new bash shell displays the unique identifier name in the prompt.
 
-$ ./wg-netns-start `<configuration_file>` `<identifier>`
+```bash
+$ ./wg-netns-shell netnsname my-username
+```
 
-Replace `<configuration_file>` with the path to the configuration file and `<identifier>` with a unique name to create a new instance.
+4. `wg-netns-execute`: Executes a command in the specified namespace.
 
-### 3. wg-netns-stop
+```bash
+$ ./wg-netns-execute netnsname "ping google.com"
+```
 
-This script stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, 
-and virtual Ethernet (veth) interfaces.
+5. `wg-netns-stop`: Stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, and virtual Ethernet (veth) interfaces.
 
-**Usage:**
+```bash
+$ ./wg-netns-stop netnsname
+```
 
-$ ./wg-netns-stop `<identifier>`
+6. `wg-netns-remove`: Removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
 
-Replace `<identifier>` with the name of the VPN instance you want to stop.
-
-### 4. wg-netns-stop
-
-This script removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
-
-**Usage:**
-
+```bash
 $ ./wg-netns-remove
+```
 
-### 5. wg-netns-shell
-
-This script starts a new bash shell in the specified namespace, preserving the current user. 
-The new bash shell displays the unique identifier name in the prompt.
-
-**Usage:**
-
-$ ./wg-netns-shell `<identifier>` `<user-name>`
-
-Replace `<identifier>` with the name of the VPN instance you want to enter and `<user-name>` with the user-id of the new shell.
-
-### 6. wg-netns-execute
-
-This script takes an identifier and a command string as input and executes the command in the specified namespace.
-
-**Usage:**
-
-$ ./wg-netns-execute `<identifier>` "`<command>`"
-
-Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
-
+To use these scripts, simply run them in the command line with the appropriate parameters.
 
 ## Disclaimer
 
