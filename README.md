@@ -1,9 +1,8 @@
-# WireGuard VPN Namespace Management Scripts
+# WireGuard Network Namespace Management Scripts For Linux
 
-This collection of scripts helps you manage multiple WireGuard VPN instances running in separate network namespaces. 
-The scripts automate the installation, creation and deletion of namespace configurations aswell as execution of commands in the namespaces. 
+This script collection simplifies the management of multiple WireGuard VPN instances running in separate network namespaces. The scripts automate the installation, creation, and deletion of namespace configurations and execution of commands within the namespaces.
 
-These scripts are designed for Linux systems.
+To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as wireguard. This eliminates the need to alter any iptables rules to route packets correctly and avoids interference with other network configurations on the system.
 
 ## Prerequisites
 
@@ -31,7 +30,9 @@ $ sudo wg-netns-remove
 
 ## Configuration File
 
-The scripts require a standard WireGuard configuration file to set up the VPN instance in the new network namespace. The configuration file should include an `Address` and a `DNS` field, as these values are essential for proper functioning. The `Address` field should contain the IP address and subnet mask for the WireGuard interface, and the `DNS` field should include the DNS server IP address that will be used for resolving domain names. The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
+To set up a VPN instance in a new network namespace using the scripts, you will need a standard WireGuard configuration file. The configuration file must include an `Address` field, which specifies the IP address and subnet mask for the WireGuard interface, as well as a `DNS` field.
+
+The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
 
 ```
 [Interface]
@@ -49,7 +50,7 @@ Endpoint = example-vpn-server.com:51820
 
 ### 1. wg-netns-install
 
-This script sets up the bridge `br0` and disables the Spanning Tree Protocol (STP).
+This script sets up a bridge named `br0`
 
 **Usage:**
 
