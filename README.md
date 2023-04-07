@@ -12,23 +12,27 @@ To use these scripts, you must have the following programs installed on your sys
 - `iproute2`: Provides the `ip` command for managing network namespaces.
 - `nmcli`: NetworkManager command-line tool.
 
+```bash
+sudo apt-get install wireguard iproute2 network-manager
+```
+
 ## Example Usage
 Install and execute a ip command from the network namespace
 ```bash
-$ sudo wg-netns-install
-$ sudo wg-netns-start /path/to/wg.conf netnsname
-$ sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
+sudo wg-netns-install
+sudo wg-netns-start /path/to/wg.conf netnsname
+sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
 ```
 ```diff
 ! Please note that the changes implemeted by the wg-netns-start command doesn't survive reboot.
 ```
 Bring the network namespace down
 ```bash
-$ sudo wg-netns-stop netnsname
+sudo wg-netns-stop netnsname
 ```
 Remove all traces of the scripts
 ```bash
-$ sudo wg-netns-remove
+sudo wg-netns-remove
 ```
 
 ## Configuration File
@@ -54,37 +58,37 @@ Endpoint = example-vpn-server.com:51820
 1. `wg-netns-install`: Sets up a bridge named `br0`.
 
 ```bash
-$ ./wg-netns-install
+./wg-netns-install
 ```
 
 2. `wg-netns-start`: Sets up a WireGuard VPN instance in a new network namespace using a specified configuration file and a unique identifier.
 
 ```bash
-$ ./wg-netns-start /path/to/config.conf netnsname
+./wg-netns-start /path/to/config.conf netnsname
 ```
 
 3. `wg-netns-shell`: Starts a new bash shell in the specified namespace, preserving the current user. The new bash shell displays the unique identifier name in the prompt.
 
 ```bash
-$ ./wg-netns-shell netnsname my-username
+./wg-netns-shell netnsname my-username
 ```
 
 4. `wg-netns-execute`: Executes a command in the specified namespace.
 
 ```bash
-$ ./wg-netns-execute netnsname "ping google.com"
+./wg-netns-execute netnsname "ping google.com"
 ```
 
 5. `wg-netns-stop`: Stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, and virtual Ethernet (veth) interfaces.
 
 ```bash
-$ ./wg-netns-stop netnsname
+./wg-netns-stop netnsname
 ```
 
 6. `wg-netns-remove`: Removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
 
 ```bash
-$ ./wg-netns-remove
+./wg-netns-remove
 ```
 
 To use these scripts, simply run them in the command line with the appropriate parameters.
