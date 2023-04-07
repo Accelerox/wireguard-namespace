@@ -22,7 +22,7 @@ $ sudo wg-netns-execute netnsname "curl ifconfig.me/ip"
 ```
 Bring the network namespace down
 ```
-$ sudo wg-nets-stop netnsname
+$ sudo wg-netns-stop netnsname
 ```
 Remove all traces of the scripts
 ```
