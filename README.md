@@ -13,61 +13,61 @@ To use these scripts, you must have the following programs installed on your sys
 
 ## Scripts
 
-### 1. vpn-install.sh
+### 1. wg-netns-install
 
 This script sets up the bridge `br0` and disables the Spanning Tree Protocol (STP).
 
 **Usage:**
 
-$ ./vpn-install.sh
+$ ./wg-netns-install
 
-### 2. vpn-start.sh
+### 2. wg-netns-start
 
 This script sets up a WireGuard VPN instance in a new network namespace using a specified configuration file and a unique identifier.
 
 **Usage:**
 
-$ ./vpn-start.sh `<configuration_file>` `<identifier>`
+$ ./wg-netns-start `<configuration_file>` `<identifier>`
 
 Replace `<configuration_file>` with the path to the configuration file and `<identifier>` with a unique name to create a new instance.
 
-### 3. vpn-stop.sh
+### 3. wg-netns-stop
 
 This script stops a WireGuard VPN instance with the given identifier and removes the corresponding namespace, bridge connection, 
 and virtual Ethernet (veth) interfaces.
 
 **Usage:**
 
-$ ./vpn-stop.sh `<identifier>`
+$ ./wg-netns-stop `<identifier>`
 
 Replace `<identifier>` with the name of the VPN instance you want to stop.
 
-### 4. vpn-remove.sh
+### 4. wg-netns-stop
 
 This script removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
 
 **Usage:**
 
-$ ./vpn-remove.sh
+$ ./wg-netns-remove
 
-### 5. vpn-shell.sh
+### 5. wg-netns-shell
 
 This script starts a new bash shell in the specified namespace, preserving the current user. 
 The new bash shell displays the unique identifier name in the prompt.
 
 **Usage:**
 
-$ ./vpn-shell.sh `<identifier>` `<user-name>`
+$ ./wg-netns-shell `<identifier>` `<user-name>`
 
 Replace `<identifier>` with the name of the VPN instance you want to enter and `<user-name>` with the user-id of the new shell.
 
-### 6. vpn-execute.sh
+### 6. wg-netns-execute
 
 This script takes an identifier and a command string as input and executes the command in the specified namespace.
 
 **Usage:**
 
-$ ./vpn-execute.sh `<identifier>` "`<command>`"
+$ ./wg-netns-execute `<identifier>` "`<command>`"
 
 Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
 
