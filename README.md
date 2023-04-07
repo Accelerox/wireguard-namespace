@@ -11,6 +11,28 @@ To use these scripts, you must have the following programs installed on your sys
 - `iproute2`: Provides the `ip` command for managing network namespaces.
 - `nmcli`: NetworkManager command-line tool (optional, used by the bridge_install.sh script).
 
+## Example Usage
+
+$ sudo wg-netns-install
+$ sudo wg-netns-start `path/to/wg.conf` `netnsname`
+$ sudo wg-netns-execute `netnsname`"curl ifconfig.me/ip"
+
+## Configuration File
+
+The scripts require a standard WireGuard configuration file to set up the VPN instance in the new network namespace. The configuration file should include an `Address` and a `DNS` field, as these values are essential for proper functioning. The `Address` field should contain the IP address and subnet mask for the WireGuard interface, and the `DNS` field should include the DNS server IP address that will be used for resolving domain names. The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
+
+```
+[Interface]
+PrivateKey = EXAMPLE_PRIVATE_KEY
+Address = 10.0.0.2/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = EXAMPLE_PUBLIC_KEY
+AllowedIPs = 0.0.0.0/0
+Endpoint = example-vpn-server.com:51820
+```
+
 ## Scripts
 
 ### 1. wg-netns-install
@@ -70,22 +92,6 @@ This script takes an identifier and a command string as input and executes the c
 $ ./wg-netns-execute `<identifier>` "`<command>`"
 
 Replace `<identifier>` with the name of the namespace you want to execute the command in, and `<command>` with the command string you want to run.
-
-## Configuration File
-
-The scripts require a standard WireGuard configuration file to set up the VPN instance in the new network namespace. The configuration file should include an `Address` and a `DNS` field, as these values are essential for proper functioning. The `Address` field should contain the IP address and subnet mask for the WireGuard interface, and the `DNS` field should include the DNS server IP address that will be used for resolving domain names. The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
-
-```
-[Interface]
-PrivateKey = EXAMPLE_PRIVATE_KEY
-Address = 10.0.0.2/24
-DNS = 1.1.1.1
-
-[Peer]
-PublicKey = EXAMPLE_PUBLIC_KEY
-AllowedIPs = 0.0.0.0/0
-Endpoint = example-vpn-server.com:51820
-```
 
 
 ## Disclaimer
