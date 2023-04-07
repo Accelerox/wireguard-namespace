@@ -10,7 +10,7 @@ To use these scripts, you must have the following programs installed on your sys
 
 - `wireguard`: Provides the WireGuard VPN kernel module and user-space utilities.
 - `iproute2`: Provides the `ip` command for managing network namespaces.
-- `nmcli`: NetworkManager command-line tool (optional, used by the bridge_install.sh script).
+- `nmcli`: NetworkManager command-line tool.
 
 ## Example Usage
 Install and execute a ip command from the network namespace
