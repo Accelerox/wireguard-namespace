@@ -1,13 +1,16 @@
 #!/bin/bash
 #
-# This script sets up multiple instances of WireGuard VPN, each with its own
+# Author: Max Idermark                                                                                                                    
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace   
+#
+# This script can set up multiple instances of WireGuard VPN, each with its own
 # namespace and network interfaces. It accepts a configuration file and a unique
 # identifier as arguments to create an isolated environment for each VPN connection.
 #
 # PS: These setups doesn't survive reboots and this script needs to be run at each boot.
 # A system service can be used or the script can be executed from the crontab.
 #
-# Usage: ./vpn-start.sh <configuration_file> <identifier>
+# Usage: ./wg-netns-start <configuration_file> <identifier>
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then
@@ -29,6 +32,7 @@ if [[ ! -f $configuration_file ]]; then
 fi
 
 # Create a temporary configuration file with a newline character appended
+# This is a failsafe done since read cant read without char return.
 tmp_configuration_file=$(mktemp)
 cat "$configuration_file" <(echo "") > "$tmp_configuration_file"
 

@@ -1,8 +1,11 @@
 #!/bin/bash
-
+#
+# Author: Max Idermark                                                                                                                    
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace
+#
 # This script removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
 #
-# Usage: ./vpn-remove.sh
+# Usage: ./wg-netns-remove
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then

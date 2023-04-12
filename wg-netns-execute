@@ -1,9 +1,9 @@
 #!/bin/bash
-
+#
 # This script executes the given command in the specified namespace.
 # Make sure the command is in quotes ""
 #
-# Usage: sudo ./vpn-execute.sh <identifier> "<command>"
+# Usage: ./wg-netns-execute <identifier> "<command>"
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then

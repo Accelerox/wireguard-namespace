@@ -1,10 +1,13 @@
 #!/bin/bash
-
+#
+# Author: Max Idermark                                                                                                                    
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace
+#
 # This script starts a new bash shell in the specified namespace.
 # The new bash shell displays the unique identifier name in the prompt.
 # The user who ran the script will be used in the new bash session.
 #
-# Usage: sudo ./vpn-shell.sh <identifier>
+# Usage: sudo ./wg-netns-shell.sh <identifier>
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then

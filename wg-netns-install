@@ -1,8 +1,11 @@
 #!/bin/bash
-
+#
+# Author: Max Idermark
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace
+#
 # This script sets up a bridge interface (br0) on your system.
 #
-# Usage: ./vpn-install.sh
+# Usage: ./wg-netns-install
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then

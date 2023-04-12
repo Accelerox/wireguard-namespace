@@ -1,9 +1,12 @@
 #!/bin/bash
-
-# This script stops a WireGuard VPN instance with the given identifier.
+#
+# Author: Max Idermark                                                                                                                    
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace   
+#
+# This script stops a WireGuard VPN instance and namespace  with a given identifier.
 # It removes the corresponding namespace, bridge connection, and virtual Ethernet (veth) interfaces.
 #
-# Usage: ./vpn-stop.sh <identifier>
+# Usage: ./wg-netns-stop <identifier>
 
 # Check if the script is run with sudo
 if [[ $EUID -ne 0 ]]; then
