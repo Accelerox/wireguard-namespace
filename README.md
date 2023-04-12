@@ -1,8 +1,8 @@
 # WireGuard Network Namespace Management Scripts For Linux
 
-This script collection simplifies the management of multiple WireGuard VPN instances running in separate network namespaces. The scripts automate the installation, starting, and stopping of namespace configurations aswell as execution of commands within the namespaces.
+This script collection simplifies the management of one (or multiple) WireGuard VPN configurations running in separate network namespaces. The scripts manage the installation, starting, and stopping aswell as execution of commands within the namespaces.
 
-To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as `wireguard` along with a network brige. This eliminates the need to alter any iptables rules to route packets correctly and avoids interference with other network configurations on the system.
+To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as `wireguard` along with a `network brige` setup. This eliminates the need to alter any iptables rules to route packets correctly.
 
 ## Prerequisites
 
