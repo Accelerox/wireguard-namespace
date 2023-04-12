@@ -87,10 +87,7 @@ Requires=wg-namespace.service
 
 ## Configuration File
 
-To set up a VPN instance in a new network namespace using the scripts, you will need a standard WireGuard configuration file. The configuration file must include an `Address` field, which specifies the IP address and subnet mask for the WireGuard interface, as well as a `DNS` field.
-
-The rest of the configuration should follow the standard WireGuard format, including fields such as `PrivateKey`, `PublicKey`, `AllowedIPs`, and `Endpoint`.
-
+These are the current known supported configuration parameters for the client configuration.
 ```
 [Interface]
 PrivateKey = EXAMPLE_PRIVATE_KEY
