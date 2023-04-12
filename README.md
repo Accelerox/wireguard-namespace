@@ -142,5 +142,5 @@ To use these scripts, simply run them in the command line with the appropriate p
 
 ## Disclaimer
 
-These scripts have only been tested with Mullvad VPN. The scripts do not support IPv6 addresses in the configuration file. When choosing an identifier name, please avoid using hyphens (-) or underscores (_) to ensure proper functioning. I take no responsibility of failiure of scripts, use at own risk. Always confirm that the setups are working wigurossly.
+These scripts have only been tested with Mullvad VPN. The scripts do not support IPv6 addresses in the configuration file. When choosing an identifier name, please avoid using hyphens (-) or underscores (_) to ensure proper functioning. I take no responsibility of failiure of scripts, use at own risk. Always confirm that the setups are working vigorously.
 
