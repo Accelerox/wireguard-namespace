@@ -100,7 +100,7 @@ ip netns exec ${identifier} wg set wg0-${identifier} private-key <(echo  "$priva
 ip netns exec ${identifier} wg set wg0-${identifier} peer "$public_key" allowed-ips "$allowed_ips" endpoint "$endpoint"
 
 # Set a default route in the namespace
-ip netns exec ${identifier} route add default dev wg0-${identifier}
+ip netns exec ${identifier} ip route add default dev wg0-${identifier}
 
 # Create virtual interface connections between bridge and namespace
 ip link add veth-nsbr-${identifier} type veth peer name veth-ns-${identifier}
