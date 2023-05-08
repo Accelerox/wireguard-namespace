@@ -32,6 +32,8 @@ for ns in $namespaces; do
 
     # Remove the namespace folder
     rm -rf /etc/netns/${ns}
+
+    echo "Removed namespace: ${ns}"
 done
 
 # Remove the bridge br0
