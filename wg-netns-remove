@@ -14,7 +14,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Get a list of all the VPN instances' namespaces
-namespaces=$(ip netns list | grep -E '^[a-zA-Z0-9_-]+$')
+namespaces=$(ip netns list | grep -oP '^\w+(?=\s)')
 
 # Remove all the VPN instances' namespaces and their corresponding folders
 for ns in $namespaces; do
