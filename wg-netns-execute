@@ -1,5 +1,8 @@
 #!/bin/bash
 #
+# Author: Max Idermark
+# GitHub Repo: https://github.com/Accelerox/wireguard-namespace
+#
 # This script executes the given command in the specified namespace.
 # Make sure the command is in quotes ""
 #
