@@ -27,8 +27,8 @@ for ns in $namespaces; do
     # Remove the virtual Ethernet (veth) interfaces
     ip link del veth-init-${ns}
 
-    # Remove the WireGuard interface from the default/init namespace
-    ip link del wg0-${ns}
+    # Remove the WireGuard interface from the default/init namespace (auto done)
+    #ip link del wg0-${ns}
 
     # Remove the namespace folder
     rm -rf /etc/netns/${ns}
