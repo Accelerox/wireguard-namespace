@@ -38,7 +38,7 @@ Bring the network namespace down
 ```bash
 sudo wg-netns-stop netnsname
 ```
-Remove all traces of the scripts
+Remove all current network namespaces and remove the bridge.
 ```bash
 sudo wg-netns-remove
 ```
@@ -132,7 +132,7 @@ Endpoint = example-vpn-server.com:51820
 ./wg-netns-stop netnsname
 ```
 
-6. `wg-netns-remove`: Removes all WireGuard VPN instances, their corresponding namespaces, and the bridge.
+6. `wg-netns-remove`: Removes all network namespaces instances and the bridge.
 
 ```bash
 ./wg-netns-remove
