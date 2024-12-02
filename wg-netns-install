@@ -14,4 +14,5 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Create bridge br0
-nmcli connection add type bridge ifname br0 stp no
+ip link add name br0 type bridge
+ip link set dev br0 up
