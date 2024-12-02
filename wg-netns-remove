@@ -37,4 +37,4 @@ for ns in $namespaces; do
 done
 
 # Remove the bridge br0
-nmcli connection delete bridge-br0
+ip link delete dev br0
