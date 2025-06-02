@@ -4,6 +4,8 @@ This script collection simplifies the management of one (or multiple) WireGuard 
 
 To ensure a safe and reliable installation, the script uses the `ip` command to initiate all interfaces and specifies the type as `wireguard` along with a `network brige` setup. This eliminates the need to alter any iptables rules to route packets correctly.
 
+Future development of the scripts is encouraged.
+
 ## Prerequisites
 
 To use these scripts, you must have the following programs installed on your system:
