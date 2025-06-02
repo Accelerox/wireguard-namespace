@@ -67,7 +67,7 @@ ExecStart=/path/to/wg-netns-start /path/to/wg.conf netns
 ExecStop=/path/to/wg-netns-stop nets
 
 [Install]
-WantedBy=multi-user.targe
+WantedBy=multi-user.target
 ```
 Start and enable the wireguard service
 ```
